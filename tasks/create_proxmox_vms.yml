@@ -1,0 +1,28 @@
+---
+
+- name: Deploy VMs for homelab cluster
+  community.general.proxmox_kvm:
+    api_user: root@pam
+    api_password: "thap!ceuk4Quoo"
+    api_host: 192.168.79.1
+    node: "{{ item.node }}"
+    vmid: "{{ item.vmid }}"
+    name: "{{ item.name }}"
+    ostype: "l26"
+    cpu: "x86-64-v3"
+    sockets: "1"
+    vcpus: "{{ item.cores | default(4) }}"
+    cores: "{{ item.cores | default(4) }}"
+    memory: "{{ item.memory | default(16384) }}"
+    scsihw: "virtio-scsi-single"
+    vga: "std"
+    ide:
+      ide2: "none,media=cdrom"
+    virtio:
+      virtio0: "replicated_ssd:{{ item.disk_size | default(128) }},iothread=on"
+    net:
+      net0: "virtio,bridge=vmbr0,firewall=1"
+    #migrate: true
+    #state: present
+  loop: "{{ homelab_vms }}"
+

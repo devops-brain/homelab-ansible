@@ -1,2 +1,19 @@
-[all]
-127.0.0.1  ansible_connection=local
+
+homelab:
+  hosts:
+   casual-corgi.khoyi.io:
+     ansible_user: root
+   nice-chimp.khoyi.io:
+     ansible_user: root
+   stable-owl.khoyi.io:
+     ansible_user: root
+   solid-buck.khoyi.io:
+     ansible_user: root
+   golden-tiger.khoyi.io:
+     ansible_user: root
+   loving-cattle.khoyi.io:
+     ansible_user: root
+local:
+  hosts:
+   127.0.0.1:
+     ansible_connection: local
